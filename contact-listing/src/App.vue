@@ -1,7 +1,33 @@
 <template>
   <div id="app">
-    <div>
-      <input type="button" v-on:click="addContact" value="Add Contact" />
+    <div></div>
+    <div class="flex items-center text-center flex-row rounded-lg">
+      <div>
+        <input
+          class="py-2 px-4 rounded-full bg-gray-200 h-8 m-2"
+          placeholder="search contact"
+          type="text"
+          name="search"
+          id
+          v-model="query"
+        />
+      </div>
+      <div>
+        <input
+          class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full m-2"
+          type="button"
+          value="Search"
+          v-on:click="searchContact"
+        />
+      </div>
+      <div>
+        <input
+          type="button"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full"
+          v-on:click="addContact"
+          value="Add Contact"
+        />
+      </div>
     </div>
     <table>
       <tr>
@@ -40,7 +66,8 @@ export default {
       contacts: [],
       toggleModal: false,
       name: null,
-      email: null
+      email: null,
+      query: null
     };
   },
   created() {
@@ -80,6 +107,20 @@ export default {
           _self.getAllContacts();
         }
       );
+    },
+    searchContact() {
+      const _self = this;
+      _self.contacts = [];
+      if(_self.query){
+        Axios.get("http://localhost:8080/search?query="+_self.query).then(response => {
+          _self.contacts = response.data;
+
+          console.log("response", _self.contacts);
+        });
+      }
+      else{
+        _self.getAllContacts();
+      }
     }
   }
 };

@@ -36,6 +36,7 @@ public class MyRESTController {
 	}
 	
 	@GetMapping("/search")
+	@CrossOrigin(origins = "http://localhost:8081")
 	public ResponseEntity getItem(@RequestParam("query") String query) {
 		if(query != null) {
 			List<Contact> list = repository.findByNameOrEmail(query, query);
