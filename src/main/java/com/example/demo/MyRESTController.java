@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,11 +15,13 @@ public class MyRESTController {
 	ContactRepository repository;
 
 	@GetMapping("/contacts")
+	@CrossOrigin(origins = "http://localhost:8081")
 	public Iterable<Contact> getContacts() {
 		return repository.findAll();
 	}
 	
 	@PostMapping("/contact")
+	@CrossOrigin(origins = "http://localhost:8081")
 	public String saveItem(@RequestBody Contact contact) {
 		Contact newItem = repository.save(contact);
 		
