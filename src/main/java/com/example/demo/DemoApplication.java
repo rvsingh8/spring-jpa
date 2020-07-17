@@ -10,8 +10,10 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
 		ContactRepository repository = context.getBean(ContactRepository.class);
-		repository.save(new Contact("John"));
-		repository.save(new Contact("Rohn"));
+		/*
+		 * repository.save(new Contact("John", "first@test.com")); repository.save(new
+		 * Contact("Rohn", "second@test.com"));
+		 */
 	}
 
 }

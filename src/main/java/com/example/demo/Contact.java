@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,8 +26,9 @@ public class Contact {
 
     }
 
-    public Contact(String name) {
+    public Contact(String name, String email) {
         this.name = name;
+        this.email = email;
     }
 
     /**
@@ -42,5 +44,22 @@ public class Contact {
     public void setName(String name) {
         this.name = name;
     }
+    
+    @Column( unique = true )
+    private String email;
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "Contact [id=" + id + ", name=" + name + ", email=" + email + "]";
+	}    
+
+	
 }
